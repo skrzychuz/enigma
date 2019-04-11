@@ -1,29 +1,37 @@
 public enum Rotor {
 
-    ROTOR1("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'),
-    ROTOR2("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'),
-    ROTOR3("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V');
+  ROTOR1("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'), //16
+  ROTOR2("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'),
+  ROTOR3("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V');
 
-    final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String map;
-    char turnOverNotch;
-    int currentPosition;
+  final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  String map;
+  char turnOverNotch;
+  int currentPosition;
 
-    Rotor(String map, char turnOverNotch) {
-        this.map = map;
-        this.turnOverNotch = turnOverNotch;
-        this.currentPosition = 0;
+  Rotor(String map, char turnOverNotch) {
+    this.map = map;
+    this.turnOverNotch = turnOverNotch;
+    this.currentPosition = 0;
+  }
+
+  public void setStartPosition(char startPosition) {
+    currentPosition = alphabetLetterIndex(startPosition);
+  }
+
+  public int alphabetLetterIndex(char letter) {
+    return alphabet.indexOf(letter);
+  }
+
+  public String cipher(char msgLetter) {
+
+    if (this.currentPosition >= 26) {
+      this.currentPosition = 0;
     }
 
+    int realIndex = alphabetLetterIndex(msgLetter) + this.currentPosition++;
+    System.out.println(String.valueOf(this.map.charAt(realIndex)));
+    return String.valueOf(this.map.charAt(realIndex));
 
-    public String cipher(char msgLetter) {
-
-        if (this.currentPosition >= 26) {
-            this.currentPosition = 0;
-        }
-
-        int realIndex = this.alphabet.indexOf(msgLetter) + this.currentPosition++;
-        return String.valueOf(this.map.charAt(realIndex));
-
-    }
+  }
 }

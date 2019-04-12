@@ -23,15 +23,19 @@ public enum Rotor {
     return alphabet.indexOf(letter);
   }
 
-  public String cipher(char msgLetter) {
+  public char cipher(char msgLetter) {
 
     if (this.currentPosition >= 26) {
       this.currentPosition = 0;
     }
 
     int realIndex = alphabetLetterIndex(msgLetter) + this.currentPosition++;
-    System.out.println(String.valueOf(this.map.charAt(realIndex)));
-    return String.valueOf(this.map.charAt(realIndex));
+    if (realIndex >= 26) {
+      realIndex = 0;
+    }
+//    System.out.println(String.valueOf(this.map.charAt(realIndex)));
+//    return String.valueOf(this.map.charAt(realIndex));
+    return this.map.charAt(realIndex);
 
   }
 }
